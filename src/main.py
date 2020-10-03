@@ -60,25 +60,3 @@ class Tree:
             self._printTree(node.l)
             print(str(node.v) + ' ')
             self._printTree(node.r)
-
-
-#     3
-# 0     4
-#   2      8
-tree = Tree()
-tree.add(8)
-tree.add(12)
-tree.add(10)
-tree.add(9)
-tree.add(11)
-tree.add(14)
-tree.add(13)
-tree.add(15)
-tree.add(4)
-tree.add(6)
-tree.add(17)
-tree.printTree()
-print("answer")
-print(tree.find())
-tree.deleteTree()
-tree.printTree()
