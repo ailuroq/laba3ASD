@@ -1,9 +1,10 @@
-#Задание: 6.Определить количество элементов в правом поддереве.
+# Задание: 6.Определить количество элементов в правом поддереве.
 class Node:
     def __init__(self, val):
         self.l = None
         self.r = None
         self.v = val
+
 
 class Tree:
     def __init__(self):
@@ -30,22 +31,24 @@ class Tree:
             else:
                 node.r = Node(val)
 
-    def find(self, val):
-        if self.root is not None:
-            return self._find(val, self.root)
+    def tree_height(self, node):
+        left_depth = self.tree_height(node.l) if node.l else 0
+        right_depth = self.tree_height(node.r) if node.r else 0
+        return max(left_depth, right_depth) + 1
+
+    def find(self):
+        if self.root is not None and self.root.r is not None:
+            self.root = self.root.r
+            return self._find(self.root)
         else:
             return None
 
-    def _find(self, val, node):
-        if val == node.v:
-            return node
-        elif (val < node.v and node.l is not None):
-            self._find(val, node.l)
-        elif (val > node.v and node.r is not None):
-            self._find(val, node.r)
+    def _find(self, node):
+        if node is None:
+            return 0
+        return self._find(node.l) + 1 + self._find(node.r)
 
     def deleteTree(self):
-        # garbage collector will do this for us.
         self.root = None
 
     def printTree(self):
@@ -58,17 +61,24 @@ class Tree:
             print(str(node.v) + ' ')
             self._printTree(node.r)
 
+
 #     3
 # 0     4
 #   2      8
 tree = Tree()
-tree.add(3)
-tree.add(4)
-tree.add(0)
 tree.add(8)
-tree.add(2)
+tree.add(12)
+tree.add(10)
+tree.add(9)
+tree.add(11)
+tree.add(14)
+tree.add(13)
+tree.add(15)
+tree.add(4)
+tree.add(6)
+tree.add(17)
 tree.printTree()
-print(tree.find(3).v)
-print(tree.find(10))
+print("answer")
+print(tree.find())
 tree.deleteTree()
 tree.printTree()
