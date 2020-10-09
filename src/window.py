@@ -11,7 +11,7 @@ import re
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QFileDialog
-
+from binarytree import tree, bst, heap, Node
 from src.main import Tree
 
 
@@ -86,6 +86,7 @@ class Ui_MainWindow(object):
     def output_tree(self, tree, model):
         model.append(str("Количество вершин правого поддерева"))
         model.append(str(tree.find()))
+        model.append(str((tree.returnTree())))
 
 
 if __name__ == "__main__":

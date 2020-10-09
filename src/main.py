@@ -1,5 +1,8 @@
 # Задание: 6.Определить количество элементов в правом поддереве.
-class Node:
+from binarytree import tree, bst, heap, Node
+
+
+class NodeC:
     def __init__(self, val):
         self.l = None
         self.r = None
@@ -9,27 +12,31 @@ class Node:
 class Tree:
     def __init__(self):
         self.root = None
+        self.rootT = None
 
     def getRoot(self):
         return self.root
 
     def add(self, val):
         if self.root is None:
-            self.root = Node(val)
+            self.rootT = Node(val)
+            self.root = NodeC(val)
         else:
-            self._add(val, self.root)
+            self._add(val, self.root, self.rootT)
 
-    def _add(self, val, node):
+    def _add(self, val, node, nodeT):
         if val < node.v:
-            if node.l is not None:
-                self._add(val, node.l)
+            if node.l and nodeT.left is not None:
+                self._add(val, node.l, nodeT.left)
             else:
-                node.l = Node(val)
+                node.l = NodeC(val)
+                nodeT.left = Node(val)
         else:
-            if node.r is not None:
-                self._add(val, node.r)
+            if node.r and nodeT.right is not None:
+                self._add(val, node.r, nodeT.right)
             else:
-                node.r = Node(val)
+                node.r = NodeC(val)
+                nodeT.right = Node(val)
 
     def tree_height(self, node):
         left_depth = self.tree_height(node.l) if node.l else 0
@@ -51,9 +58,8 @@ class Tree:
     def deleteTree(self):
         self.root = None
 
-    def printTree(self):
-        if self.root is not None:
-            self._printTree(self.root)
+    def returnTree(self):
+        return self.rootT
 
     def _printTree(self, node):
         if node is not None:
